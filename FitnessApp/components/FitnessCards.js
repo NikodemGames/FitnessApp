@@ -10,7 +10,7 @@ const FitnessCards = () => {
   return (
     <View>
         {FitnessData.map((item, key) => (
-            <Pressable onPress={() => navigation.navigate("Workout", {image:item.image, excersises:item.escersises, id:item.id})} 
+            <Pressable onPress={() => navigation.navigate("Workout", {image:item.image, excersises:item.excersises, id:item.id})} 
             style={{alignItems:"center", justifyContent:"center",margin:10}} key={key}>
                 <Image style={{width:"90%", height:140,borderRadius:7}} source={{uri:item.image}}>
 
