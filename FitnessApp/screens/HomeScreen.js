@@ -9,11 +9,12 @@ const HomeScreen = ({navigation}) => {
         <ScrollView style={{marginTop:50}}>
             <View style={{ backgroundColor: "#CD853F", padding: 10, height: 200, width: "100%" }}>
                 <Text style={{ color: "white", fontWeight: "bold", fontSize: 18 }}>HOME WORKOUT</Text>
-                <Button title="Go to Profile" onPress={() => navigation.navigate('StepCounter')} />
+                <Button title="Step Counter" onPress={() => navigation.navigate('StepCounter')} />
                 <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: 20 }}>
                     <View>
                         <Text style={{ textAlign: "center", fontWeight: "bold", color: "white", fontSize: 18 }}>{workout}</Text>
                         <Text style={{color:"#D0D0D0", fontSize:17, marginTop:6}}>WORKOUT</Text>
+                        <Button title="Profile" onPress={() => navigation.navigate('Profile')} />
                     </View>
 
                     <View>

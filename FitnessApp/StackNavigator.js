@@ -7,6 +7,7 @@ import WorkoutScreen from './screens/WorkoutScreen';
 import FitScreen from './screens/FitScreen';
 import RestScreen from './screens/RestScreen';
 import StepCounterScreen from './screens/StepCounterScreen';
+import UserProfile from './screens/UserProfile';
 
 const StackNavigator = () => {
     const Stack = createNativeStackNavigator();
@@ -19,6 +20,7 @@ const StackNavigator = () => {
         <Stack.Screen name="Fit" component={FitScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Rest" component={RestScreen} options= {{headerShown:false}} />
         <Stack.Screen name="StepCounter" component={StepCounterScreen} options= {{headerShown:false}}/>
+        <Stack.Screen name="Profile" component={UserProfile} options= {{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   )
