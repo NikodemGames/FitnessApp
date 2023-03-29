@@ -7,36 +7,81 @@ const HomeScreen = ({navigation}) => {
     const { minutes,  calories, workout } = useContext(FitnessItems);
     return (
         <ScrollView style={{marginTop:50}}>
-            <View style={{ backgroundColor: "#CD853F", padding: 10, height: 200, width: "100%" }}>
-                <Text style={{ color: "white", fontWeight: "bold", fontSize: 18 }}>HOME WORKOUT</Text>
-                <Button title="Step Counter" onPress={() => navigation.navigate('StepCounter')} />
-                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: 20 }}>
-                    <View>
-                        <Text style={{ textAlign: "center", fontWeight: "bold", color: "white", fontSize: 18 }}>{workout}</Text>
-                        <Text style={{color:"#D0D0D0", fontSize:17, marginTop:6}}>WORKOUT</Text>
-                        <Button title="Profile" onPress={() => navigation.navigate('Profile')} />
-                    </View>
-
-                    <View>
-                        <Text style={{ textAlign: "center", fontWeight: "bold", color: "white", fontSize: 18 }}>{calories}</Text>
-                        <Text style={{color:"#D0D0D0", fontSize:17, marginTop:6}}>KCAL</Text>
-                    </View>
-
-                    <View>
-                        <Text style={{ textAlign: "center", fontWeight: "bold", color: "white", fontSize: 18 }}>{minutes}</Text>
-                        <Text style={{color:"#D0D0D0", fontSize:17, marginTop:6}}>MINUTES</Text>
-                    </View>
-                </View>
-                <View style={{justifyContent: "center",alignItems:"center"}}>
-                    <Image style={{width:"90%",height:120,marginTop:20,borderRadius:7}} source={{uri:"https://cdn-images.cure.fit/www-curefit-com/image/upload/c_fill,w_842,ar_1.2,q_auto:eco,dpr_2,f_auto,fl_progressive/image/test/sku-card-widget/gold2.png",}}/>
-                </View>
-                <FitnessCards/>
-                
-            </View>
+            <View style={styles.container}>
+  <Text style={styles.title}>HOME WORKOUT</Text>
+  <Button style={styles.button} title="Step Counter" onPress={() => navigation.navigate('StepCounter')} />
+  <View style={styles.row}>
+    <View style={styles.workoutInfo}>
+      <Text style={styles.workoutTitle}>{workout}</Text>
+      <Text style={styles.workoutSubtitle}>WORKOUT</Text>
+      <Button title="Profile" onPress={() => navigation.navigate('Profile')} />
+    </View>
+    <View style={styles.workoutInfo}>
+      <Text style={styles.workoutTitle}>{calories}</Text>
+      <Text style={styles.workoutSubtitle}>KCAL</Text>
+    </View>
+    <View style={styles.workoutInfo}>
+      <Text style={styles.workoutTitle}>{minutes}</Text>
+      <Text style={styles.workoutSubtitle}>MINUTES</Text>
+    </View>
+  </View>
+  <View style={styles.imageContainer}>
+    <Image style={styles.image} source={{uri:"https://cdn-images.cure.fit/www-curefit-com/image/upload/c_fill,w_842,ar_1.2,q_auto:eco,dpr_2,f_auto,fl_progressive/image/test/sku-card-widget/gold2.png",}}/>
+  </View>
+  <FitnessCards/>
+</View>
         </ScrollView>
     )
 }
 
 export default HomeScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#CD853F',
+    paddingTop: 50,
+    paddingHorizontal: 10,
+  },
+  title: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18,
+    marginBottom: 10,
+  },
+  button: {
+    marginBottom: 20,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 20,
+  },
+  workoutInfo: {
+    alignItems: 'center',
+  },
+  workoutTitle: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 18,
+    marginBottom: 6,
+  },
+  workoutSubtitle: {
+    color: '#D0D0D0',
+    fontSize: 17,
+    marginTop: 6,
+  },
+  imageContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  image: {
+    width: '90%',
+    height: 120,
+    borderRadius: 7,
+  },
+});
+
