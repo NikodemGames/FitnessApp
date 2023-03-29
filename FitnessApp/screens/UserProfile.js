@@ -54,7 +54,7 @@ const UserProfile = () => {
       };
       await AsyncStorage.setItem('user', JSON.stringify(userData));
       console.log('User data saved successfully!');
-      navigation.goBack();
+      navigation.navigate("Home");
     } catch (e) {
       console.log('Error saving user:', e);
     }
