@@ -54,7 +54,7 @@ const UserProfile = () => {
       };
       await AsyncStorage.setItem('user', JSON.stringify(userData));
       console.log('User data saved successfully!');
-      navigation.navigate("Home");
+      navigation.navigate('Home');
     } catch (e) {
       console.log('Error saving user:', e);
     }
@@ -62,59 +62,96 @@ const UserProfile = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Name: {name}</Text>
-      <Text style={styles.text}>Age: {age}</Text>
-      <Text style={styles.text}>Height: {height}</Text>
-      <Text style={styles.text}>Weight: {weight}</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Name"
-        value={name}
-        onChangeText={handleNameChange}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Age"
-        keyboardType="numeric"
-        value={age}
-        onChangeText={handleAgeChange}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Height"
-        keyboardType="numeric"
-        value={height}
-        onChangeText={handleHeightChange}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Weight"
-        keyboardType="numeric"
-        value={weight}
-        onChangeText={handleWeightChange}
-      />
-      <Button title="Save" onPress={handleSave} />
+      <View style={styles.header}>
+        <Text style={styles.headerText}>User Profile</Text>
+      </View>
+      <View style={styles.form}>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Name</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Name"
+            value={name}
+            onChangeText={handleNameChange}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Age</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Age"
+            keyboardType="numeric"
+            value={age}
+            onChangeText={handleAgeChange}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Height (cm)</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Height"
+            keyboardType="numeric"
+            value={height}
+            onChangeText={handleHeightChange}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Weight (kg)</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Weight"
+            keyboardType="numeric"
+            value={weight}
+            onChangeText={handleWeightChange}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button title="Save" onPress={handleSave} />
+        </View>
+      </View>
     </View>
   );
 };
-
+export default UserProfile;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#fff',
   },
-  text: {
-    fontSize: 20,
-    marginVertical: 5,
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  inputContainer: {
+    width: '80%',
+    marginBottom: 20,
   },
   input: {
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: '#ccc',
     padding: 10,
-    marginVertical: 5,
+    fontSize: 18,
+    borderRadius: 5,
+  },
+  buttonContainer: {
     width: '80%',
+    marginTop: 20,
+  },
+  button: {
+    backgroundColor: '#007AFF',
+    padding: 15,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 
-export default UserProfile;
+
+

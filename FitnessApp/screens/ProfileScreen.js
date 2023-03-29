@@ -26,17 +26,32 @@ const Profile = () => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>My Profile</Text>
+        <Button title="Edit" onPress={handleEdit} />
+      </View>
       {userData ? (
         <>
-          <Text style={styles.text}>Name: {userData.name}</Text>
-          <Text style={styles.text}>Age: {userData.age}</Text>
-          <Text style={styles.text}>Height: {userData.height} cm</Text>
-          <Text style={styles.text}>Weight: {userData.weight} kg</Text>
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Name</Text>
+            <Text style={styles.sectionText}>{userData.name}</Text>
+          </View>
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Age</Text>
+            <Text style={styles.sectionText}>{userData.age}</Text>
+          </View>
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Height</Text>
+            <Text style={styles.sectionText}>{userData.height} cm</Text>
+          </View>
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Weight</Text>
+            <Text style={styles.sectionText}>{userData.weight} kg</Text>
+          </View>
         </>
       ) : (
         <Text style={styles.text}>No user data found.</Text>
       )}
-      <Button title="Edit Info" onPress={handleEdit} />
     </View>
   );
 };
@@ -44,12 +59,30 @@ const Profile = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#fff',
+    paddingHorizontal: 20,
   },
-  text: {
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 50,
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  section: {
+    marginBottom: 15,
+  },
+  sectionTitle: {
     fontSize: 18,
-    marginVertical: 10,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  sectionText: {
+    fontSize: 16,
   },
 });
 
