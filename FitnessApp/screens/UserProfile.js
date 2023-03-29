@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const UserProfile = () => {
   const [name, setName] = useState('');
@@ -23,11 +24,20 @@ const UserProfile = () => {
     setWeight(value);
   };
 
-  const handleSubmit = () => {
-    console.log(`Name: ${name}, Age: ${age}, Height: ${height}, Weight: ${weight}`);
-    // You can replace the console.log statement with code that handles the form data, such as submitting it to a server or saving it to local storage.
+  const handleSubmit = async () => {
+    try {
+      const userData = {
+        name: name,
+        age: age,
+        height: height,
+        weight: weight,
+      };
+      await AsyncStorage.setItem('user', JSON.stringify(userData));
+      console.log('User data saved successfully!');
+    } catch (e) {
+      console.log('Error saving user:', e);
+    }
   };
-
 
   return (
     <View style={styles.container}>
@@ -37,7 +47,7 @@ const UserProfile = () => {
         value={name}
         onChangeText={handleNameChange}
       />
-    <TextInput
+      <TextInput
         style={styles.input}
         placeholder="Age"
         keyboardType="numeric"
