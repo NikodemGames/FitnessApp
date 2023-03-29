@@ -14,7 +14,7 @@ const HomeScreen = ({navigation}) => {
     <View style={styles.workoutInfo}>
       <Text style={styles.workoutTitle}>{workout}</Text>
       <Text style={styles.workoutSubtitle}>WORKOUT</Text>
-      <Button title="Profile" onPress={() => navigation.navigate('Profile')} />
+      <Button title="ProfileScreen" onPress={() => navigation.navigate('ProfileScreen')} />
     </View>
     <View style={styles.workoutInfo}>
       <Text style={styles.workoutTitle}>{calories}</Text>

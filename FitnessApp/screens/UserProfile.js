@@ -1,12 +1,32 @@
-import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
 const UserProfile = () => {
+  const navigation = useNavigation();
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const jsonValue = await AsyncStorage.getItem('user');
+        if (jsonValue !== null) {
+          const data = JSON.parse(jsonValue);
+          setName(data.name);
+          setAge(data.age);
+          setHeight(data.height);
+          setWeight(data.weight);
+        }
+      } catch (e) {
+        console.log('Error retrieving user:', e);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleNameChange = (value) => {
     setName(value);
@@ -24,7 +44,7 @@ const UserProfile = () => {
     setWeight(value);
   };
 
-  const handleSubmit = async () => {
+  const handleSave = async () => {
     try {
       const userData = {
         name: name,
@@ -34,6 +54,7 @@ const UserProfile = () => {
       };
       await AsyncStorage.setItem('user', JSON.stringify(userData));
       console.log('User data saved successfully!');
+      navigation.goBack();
     } catch (e) {
       console.log('Error saving user:', e);
     }
@@ -41,6 +62,10 @@ const UserProfile = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.text}>Name: {name}</Text>
+      <Text style={styles.text}>Age: {age}</Text>
+      <Text style={styles.text}>Height: {height}</Text>
+      <Text style={styles.text}>Weight: {weight}</Text>
       <TextInput
         style={styles.input}
         placeholder="Name"
@@ -68,7 +93,7 @@ const UserProfile = () => {
         value={weight}
         onChangeText={handleWeightChange}
       />
-      <Button title="Submit" onPress={handleSubmit} />
+      <Button title="Save" onPress={handleSave} />
     </View>
   );
 };
@@ -78,6 +103,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  text: {
+    fontSize: 20,
+    marginVertical: 5,
   },
   input: {
     borderWidth: 1,
