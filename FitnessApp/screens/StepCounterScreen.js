@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Pedometer } from 'expo-sensors';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const StepCounterScreen = () => {
@@ -8,7 +9,21 @@ const StepCounterScreen = () => {
   const [stepCount, setStepCount] = useState(0);
   const [caloriesBurned, setCaloriesBurned] = useState(0);
   const [distance, setDistance] = useState(0);
-  const [weight, setWeight] = useState(70); // assigned a default weight 
+  const [weight, setWeight] = useState(70); // assigned a default weight
+  const getUserData = async () => {
+    try {
+      const userDataString = await AsyncStorage.getItem('user');
+      const userData = JSON.parse(userDataString);
+      const userWeight = userData.weight;
+      setWeight(userWeight);
+    } catch (e) {
+      console.log('Error getting user data:', e);
+    }
+  };
+ 
+  useEffect(()=>{
+    getUserData();
+  },[]);
 
   //pedometer counts number of steps
   useEffect(() => {
@@ -52,18 +67,20 @@ const StepCounterScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    backgroundColor: '#F5FCFF',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    justifyContent: 'center',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
+    marginTop: 20,
     marginBottom: 10,
   },
   value: {
-    fontSize: 18,
+    fontSize: 36,
     textAlign: 'center',
+    marginBottom: 20,
   },
 });
 
