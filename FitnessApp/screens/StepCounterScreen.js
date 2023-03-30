@@ -10,13 +10,16 @@ const StepCounterScreen = () => {
   const [stepCount, setStepCount] = useState(0);
   const [caloriesBurned, setCaloriesBurned] = useState(0);
   const [distance, setDistance] = useState(0);
-  const [weight, setWeight] = useState(70); // assigned a default weight
+  const [weight, setWeight] = useState(70); // assigned a default weight in kg
+  const [height, setHeight] = useState(170)// assigned a default height in cm
   const getUserData = async () => {
     try {
       const userDataString = await AsyncStorage.getItem('user');
       const userData = JSON.parse(userDataString);
       const userWeight = userData.weight;
+      const userHeight = userData.height; 
       setWeight(userWeight);
+      setHeight(userHeight)
     } catch (e) {
       console.log('Error getting user data:', e);
     }
@@ -33,20 +36,21 @@ const StepCounterScreen = () => {
     console.log('step count:', result.steps);
     setStepCount(result.steps);
 
-    //calculates the distance in km based on the average length
-    const distanceInMeters = result.steps * 0.75; // average step length is 75cm
-    const distanceInKm = distanceInMeters / 1000; // convert to kilometers
-    setDistance(distanceInKm);
+    //calculates the distance based on users estemated step length
+    const strideLength = height * 0.415; // estimate of average stride length based on the users height
+    const distanceInMeters = result.steps * strideLength / 100; // Convert stride length to meters
+    setDistance(distanceInMeters /1000);
+    console.log('stride length: ', strideLength); 
 
+    const caloriesBurnedValue = (weight * 3.5 * distanceInMeters/1000); // calories burned = weight x MET value for walking x distance 
+      setCaloriesBurned(caloriesBurnedValue); 
 
-    const caloriesBurnedValue = (weight * 3.5 * distanceInKm); // calories burned = weight x MET value for walking x distance
-      setCaloriesBurned(caloriesBurnedValue);
     });
 
     return () => {
       subscription.remove();
     };
-  }, [weight]);
+  }, [weight, height]);
 
   return (
     <View style={styles.container}>
@@ -65,7 +69,7 @@ const StepCounterScreen = () => {
       <Text style={styles.title}>Weight:</Text>
       <Text style={styles.value}>{weight} kg</Text>
     </View>
-  );
+  ); 
 };
 
 const styles = StyleSheet.create({
