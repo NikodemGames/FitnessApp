@@ -38,7 +38,7 @@ const StepCounterScreen = () => {
     setDistance(distanceInKm);
 
 
-    const caloriesBurnedValue = (weight * 3.5 * distanceInKm) / 200; // calories burned = weight x MET value for walking x distance
+    const caloriesBurnedValue = (weight * 3.5 * distanceInKm); // calories burned = weight x MET value for walking x distance
       setCaloriesBurned(caloriesBurnedValue);
     });
 
@@ -49,6 +49,9 @@ const StepCounterScreen = () => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Cardio Workout</Text>
+      </View>
       <Text style={styles.title}>Step Count:</Text>
       <Text style={styles.value}>{stepCount}</Text>
 
@@ -67,9 +70,21 @@ const StepCounterScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#1E1E1E',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  header: {
+    width: '100%',
+    height: 50,
+    backgroundColor: '#3CB371',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#FFF',
   },
   title: {
     fontSize: 24,
