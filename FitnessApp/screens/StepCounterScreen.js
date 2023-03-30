@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Pedometer } from 'expo-sensors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Colours } from './Colours';
 
 
 const StepCounterScreen = () => {
@@ -70,32 +71,35 @@ const StepCounterScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1E1E1E',
+    backgroundColor: Colours.black,
     alignItems: 'center',
     justifyContent: 'center',
   },
   header: {
     width: '100%',
     height: 50,
-    backgroundColor: '#3CB371',
+    backgroundColor: Colours.emerald,
     justifyContent: 'center',
     alignItems: 'center',
   },
   headerText: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#FFF',
+    color: Colours.white,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: Colours.white,
     marginTop: 20,
     marginBottom: 10,
   },
   value: {
     fontSize: 36,
     textAlign: 'center',
+    color: Colours.white,
     marginBottom: 20,
+    
   },
 });
 
