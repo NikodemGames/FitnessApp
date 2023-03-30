@@ -2,6 +2,8 @@ import { StyleSheet, Text, View, SafeAreaView, Image, Pressable, Vibration} from
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { FitnessItems } from '../Context'
+import fitness from '../data/fitness'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function handleVibration() {
   if (Vibration.vibrate) {
@@ -11,6 +13,9 @@ export function handleVibration() {
   }
 }
 
+
+
+
 const FitScreen = () => {
     const route = useRoute ();
     const navigation = useNavigation();
@@ -19,21 +24,36 @@ const FitScreen = () => {
     const current = excersise[index];
     // console.log(current, "first exercise")
     const {completed, setCompleted, minutes, setMinutes, calories, setCalories, workout, setWorkout} = useContext(FitnessItems);
-    console.log(completed, "completed exercise");
+    console.log(workout, "completed exercise");
+
+    const saveWorkoutLog = async (date, workout) => {
+      try {
+        const log = { date, workout };
+        const existingLogs = await AsyncStorage.getItem('workoutLogs');
+        const newLogs = existingLogs ? JSON.parse(existingLogs).concat(log) : [log];
+        await AsyncStorage.setItem('workoutLogs', JSON.stringify(newLogs));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    
+    const handleWorkoutComplete = async () => {
+      await saveWorkoutLog(new Date(), workout);
+      navigation.navigate("Home");
+      handleVibration();
+    }
 
     
     
   return (
     <SafeAreaView>
+      
       <Image style ={{width:"100%", height:300}} source = {{uri:current.image}}/>
       <Text style = {{marginLeft:"auto", marginRight:"auto", marginTop:30, fontSize:30, fontWeight:"bold"}}>{current.name}</Text>
       <Text style = {{marginLeft:"auto", marginRight:"auto", marginTop:30, fontSize:40, fontWeight:"bold"}}>x{current.sets}</Text>
       
       {index +1 >= excersise.length ? (
-        <Pressable onPress={() => {
-          navigation.navigate("Home")
-          handleVibration();
-        }} 
+        <Pressable onPress={handleWorkoutComplete} 
         style ={{backgroundColor:"black", padding:10, marginLeft:"auto", marginRight:"auto", marginVertical:20, borderRadius:20, width:100}}>
           <Text style = {{textAlign:"center", fontWeight:"bold", fontSize:20, color:"white"}}>Finish</Text>
         </Pressable>

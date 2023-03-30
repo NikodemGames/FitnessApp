@@ -23,6 +23,7 @@ const HomeScreen = ({navigation}) => {
     <View style={styles.workoutInfo}>
       <Text style={styles.workoutTitle}>{minutes}</Text>
       <Text style={styles.workoutSubtitle}>MINUTES</Text>
+      <Button title="WorkoutLogsScreen" onPress={() => navigation.navigate('LogScreen')} />
     </View>
   </View>
   <View style={styles.imageContainer}>
