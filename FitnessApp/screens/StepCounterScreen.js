@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import { Pedometer } from 'expo-sensors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Colours } from './Colours';
+import { useNavigation } from '@react-navigation/native'; 
+import { Ionicons } from '@expo/vector-icons';
 
 
 const StepCounterScreen = () => {
@@ -12,6 +14,8 @@ const StepCounterScreen = () => {
   const [distance, setDistance] = useState(0);
   const [weight, setWeight] = useState(70); // assigned a default weight in kg
   const [height, setHeight] = useState(170)// assigned a default height in cm
+  const navigation = useNavigation();
+
   const getUserData = async () => {
     try {
       const userDataString = await AsyncStorage.getItem('user');
@@ -44,7 +48,6 @@ const StepCounterScreen = () => {
 
     const caloriesBurnedValue = (weight * 3.5 * distanceInMeters/1000); // calories burned = weight x MET value for walking x distance 
       setCaloriesBurned(caloriesBurnedValue); 
-
     });
 
     return () => {
@@ -52,8 +55,18 @@ const StepCounterScreen = () => {
     };
   }, [weight, height]);
 
+  const navigateToStepResults = () => {
+    navigation.navigate('StepResults', {
+      stepCount: stepCount,
+      distance: distance,
+      caloriesBurned: caloriesBurned,
+    });
+  };
+
   return (
     <View style={styles.container}>
+      <Ionicons onPress={() => navigation.goBack()}
+      style={{position:"absolute", top:60, left:20}} name="arrow-back-circle" size={30} color="white" />
       <View style={styles.header}>
         <Text style={styles.headerText}>Cardio Workout</Text>
       </View>
@@ -65,9 +78,13 @@ const StepCounterScreen = () => {
 
       <Text style={styles.title}>Calories Burned:</Text>
       <Text style={styles.value}>{caloriesBurned.toFixed(2)} kcal</Text>
+      {/* <Text style={styles.title}>Weight:</Text>
+      <Text style={styles.value}>{weight} kg</Text> */}
+      
+      <TouchableOpacity style={styles.button} onPress={navigateToStepResults}>
+        <Text style={styles.buttonText}>Finish Workout</Text>
+      </TouchableOpacity>
 
-      <Text style={styles.title}>Weight:</Text>
-      <Text style={styles.value}>{weight} kg</Text>
     </View>
   ); 
 };
@@ -87,24 +104,37 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerText: {
-    fontSize: 24,
+    fontSize: 40,
     fontWeight: 'bold',
     color: Colours.white,
   },
   title: {
-    fontSize: 24,
+    fontSize: 30,
     fontWeight: 'bold',
     color: Colours.white,
     marginTop: 20,
     marginBottom: 10,
   },
+  
   value: {
-    fontSize: 36,
+    fontSize: 24,
     textAlign: 'center',
     color: Colours.white,
-    marginBottom: 20,
-    
+    marginBottom: 10,
+  },
+  button: {
+    backgroundColor: Colours.emerald,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 10,
+  },
+  buttonText: {
+    color: Colours.white,
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
-
 export default StepCounterScreen;

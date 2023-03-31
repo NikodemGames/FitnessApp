@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, SafeAreaView, Image, Pressable, ScrollView} from 'react-native'
 import React, {useContext} from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { Entypo } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { FitnessItems } from '../Context';
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -15,8 +15,9 @@ const WorkoutScreen = () => {
     <ScrollView style={{backgroundColor:"white", marginTop:50}}>
       <Image style={{width: '100%', height: 170}} source={{uri:route.params.image}}/>
 
-      <Entypo onPress={() => navigation.goBack()}
-      style={{position:"absolute", top:20, left:20}} name="back" size={28} color="white" />
+      <Ionicons onPress={() => navigation.goBack()}
+      style={{position:"absolute", top:10, left:20}} name="arrow-back-circle" size={30} color="white" />
+      
 
       {route.params.excersises.map((item, index) => (
       <Pressable style = {{margin:10, flexDirection:"row", alignItems:"center"}} key = {index}>

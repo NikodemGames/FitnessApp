@@ -24,9 +24,7 @@ const WorkoutLogsScreen = () => {
         <Text style={styles.header}>Workout Logs</Text>
         {workoutLogs.map((log, index) => (
           <View style={styles.log} key={index}>
-<Text style={styles.logText}>{new Date(log.date).toLocaleDateString()} - {log.workout}</Text>
-
-            {log.completed && <Text style={styles.logText}>{log.completed.join(' , ')}</Text>}
+            <Text style={styles.logText}>{new Date(log.date).toLocaleDateString()} - {log.workout+1} Completed Exercises</Text>
           </View>
         ))}
       </View>

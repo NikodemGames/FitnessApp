@@ -7,6 +7,7 @@ import WorkoutScreen from './screens/WorkoutScreen';
 import FitScreen from './screens/FitScreen';
 import RestScreen from './screens/RestScreen';
 import StepCounterScreen from './screens/StepCounterScreen';
+import StepResultsScreen from './screens/StepResultsScreen';
 import UserProfile from './screens/UserProfile';
 import ProfileScreen from './screens/ProfileScreen';
 import WorkoutLogsScreen from './screens/WorkoutLogsScreen';
@@ -22,6 +23,7 @@ const StackNavigator = () => {
         <Stack.Screen name="Fit" component={FitScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Rest" component={RestScreen} options= {{headerShown:false}} />
         <Stack.Screen name="StepCounter" component={StepCounterScreen} options= {{headerShown:false}}/>
+        <Stack.Screen name="StepResults" component={StepResultsScreen} options= {{headerShown:false}}/>
         <Stack.Screen name="ProfileEdit" component={UserProfile} options= {{headerShown:false}}/>
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} options= {{headerShown:false}}/>
         <Stack.Screen name="LogScreen" component={WorkoutLogsScreen} options= {{headerShown:false}}/>
