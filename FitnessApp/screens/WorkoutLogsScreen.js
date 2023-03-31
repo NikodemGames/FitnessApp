@@ -1,55 +1,88 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Ionicons } from '@expo/vector-icons';
+import { Colours } from './Colours';
 
-const WorkoutLogsScreen = () => {
-    const [workoutLogs, setWorkoutLogs] = useState([]);
-  
-    useEffect(() => {
-      getWorkoutLogs();
-    }, []);
-  
-    const getWorkoutLogs = async () => {
-      try {
-        const jsonValue = await AsyncStorage.getItem('workoutLogs');
-        const logs = jsonValue != null ? JSON.parse(jsonValue) : [];
-        setWorkoutLogs(logs);
-      } catch (e) {
-        console.error('Error retrieving workout logs: ', e);
-      }
-    };
-  
-    return (
-      <View style={styles.container}>
-        <Text style={styles.header}>Workout Logs</Text>
+const WorkoutLogsScreen = ({ navigation }) => {
+  const [workoutLogs, setWorkoutLogs] = useState([]);
+
+  useEffect(() => {
+    getWorkoutLogs();
+  }, []);
+
+  const getWorkoutLogs = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('workoutLogs');
+      const logs = jsonValue != null ? JSON.parse(jsonValue) : [];
+      setWorkoutLogs(logs);
+    } catch (e) {
+      console.error('Error retrieving workout logs: ', e);
+    }
+  };
+
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.header}>
+        <Ionicons name="arrow-back-circle" size={30} color={Colours.white} style={styles.backIcon} onPress={() => navigation.goBack()}/>
+        <Text style={styles.headerText}>Workout Logs</Text>
+      </View>
+      <View style={styles.logsContainer}>
         {workoutLogs.map((log, index) => (
           <View style={styles.log} key={index}>
-            <Text style={styles.logText}>{new Date(log.date).toLocaleDateString()} - {log.workout+1} Completed Exercises</Text>
+            <Text style={styles.logDate}>{new Date(log.date).toLocaleDateString()}</Text>
+            <Text style={styles.logText}>{log.workout + 1} Completed Exercises</Text>
           </View>
         ))}
       </View>
-    );
-  };
-  
+    </ScrollView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    backgroundColor: Colours.emerald,
   },
   header: {
-    fontSize: 24,
+    flex: 1,
+    height: 180,
+    backgroundColor: Colours.black,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  backIcon: {
+    position: 'absolute',
+    top: 60,
+    left: 20,
+  },
+  headerText: {
+    fontSize: 40,
     fontWeight: 'bold',
-    marginBottom: 20,
+    color: Colours.white,
+  },
+  logsContainer: {
+    marginTop: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   log: {
-    backgroundColor: '#f2f2f2',
-    padding: 10,
+    width: '60%',
+    padding: 15,
     borderRadius: 10,
-    marginBottom: 10,
+    backgroundColor: Colours.white,
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+  logDate: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: Colours.black,
+    marginBottom: 5,
   },
   logText: {
-    fontSize: 18,
+    fontSize: 12,
+    color: Colours.black,
   },
 });
 
