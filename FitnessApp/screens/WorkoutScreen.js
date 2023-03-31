@@ -4,42 +4,92 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
 const WorkoutScreen = () => {
-    const route = useRoute();
-    const navigation = useNavigation();
+  const route = useRoute();
+  const navigation = useNavigation();
+
   return (
     <>
-    <ScrollView style={{backgroundColor:"white", marginTop:50}}>
-      <Image style={{width: '100%', height: 170}} source={{uri:route.params.image}}/>
+      <ScrollView style={styles.scrollView}>
+        <Image style={styles.image} source={{uri:route.params.image}}/>
 
-      <Ionicons onPress={() => navigation.goBack()}
-      style={{position:"absolute", top:10, left:20}} name="arrow-back-circle" size={30} color="white" />
-      
+        <Ionicons onPress={() => navigation.goBack()}
+        style={styles.backButton} name="arrow-back-circle" size={30} color="white" />
 
-      {route.params.excersises.map((item, index) => (
-      <Pressable style = {{margin:10, flexDirection:"row", alignItems:"center"}} key = {index}>
-        <Image style = {{width:90, height:90}} source={{uri:item.image}}/> 
+        {route.params.excersises.map((item, index) => (
+          <Pressable style={styles.pressable} key={index}>
+            <Image style={styles.excersiseImage} source={{uri:item.image}}/> 
 
-        <View style = {{marginLeft:15,}}>
-          <Text style={{fontSize:20, fontWeight:"bold"}}> {item.name}</Text>
+            <View style={styles.excersiseDetails}>
+              <Text style={styles.excersiseName}>{item.name}</Text>
 
-          <Text style={{marginTop:4, fontSize:18, color:"gray"}}>x{item.sets}</Text>
-        </View>
+              <Text style={styles.excersiseSets}>x{item.sets}</Text>
+            </View>
+          </Pressable>
+        ))}
+      </ScrollView>
+
+      <Pressable onPress={() => {
+        navigation.navigate("Fit",{ excersises:route.params.excersises, 
+        })
+      }}
+      style={styles.startButton}>
+          <Text style={styles.startButtonText}>START</Text>
       </Pressable>
-      ))}
-    </ScrollView>
-
-    <Pressable onPress={() => {
-      navigation.navigate("Fit",{ excersises:route.params.excersises, 
-      })
-    }}
-    style = {{backgroundColor:"black", padding:10, marginLeft:"auto", marginRight:"auto", marginVertical:20, borderRadius:6, width:100}}>
-        <Text style = {{textAlign:"center", color: "white", fontSize:15, fontWeight:"600"}}>START</Text>
-    </Pressable>
-
     </>
   );
 };
 
+
 export default WorkoutScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  scrollView: {
+    backgroundColor: "white",
+    marginTop: 50,
+  },
+  image: {
+    width: '100%',
+    height: 170,
+  },
+  backButton: {
+    position: "absolute",
+    top: 10,
+    left: 20,
+  },
+  pressable: {
+    margin: 10,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  excersiseImage: {
+    width: 90,
+    height: 90,
+  },
+  excersiseDetails: {
+    marginLeft: 15,
+  },
+  excersiseName: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  excersiseSets: {
+    marginTop: 4,
+    fontSize: 18,
+    color: "gray",
+  },
+  startButton: {
+    backgroundColor: "black",
+    padding: 10,
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginVertical: 20,
+    borderRadius: 6,
+    width: 100,
+  },
+  startButtonText: {
+    textAlign: "center",
+    color: "white",
+    fontSize: 15,
+    fontWeight: "600",
+  },
+});

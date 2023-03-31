@@ -33,4 +33,21 @@ const RestScreen = () => {
 
 export default RestScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  image: {
+    width: '100%',
+    height: 420,
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: '900',
+    marginTop: 50,
+    textAlign: 'center',
+  },
+  timer: {
+    fontSize: 40,
+    fontWeight: '800',
+    marginTop: 50,
+    textAlign: 'center',
+  },
+})
