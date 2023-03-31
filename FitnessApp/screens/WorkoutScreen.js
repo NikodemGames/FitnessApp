@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Image, Pressable, ScrollView} from 'react-nativ
 import React, {useContext} from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import { handleVibration } from '../screens/FitScreen';
 
 const WorkoutScreen = () => {
   const route = useRoute();
@@ -32,9 +33,10 @@ const WorkoutScreen = () => {
       <Pressable onPress={() => {
         navigation.navigate("Fit",{ excersises:route.params.excersises, 
         })
+        handleVibration();
       }}
       style={styles.startButton}>
-          <Text style={styles.startButtonText}>START</Text>
+          <Text style={styles.startButtonText} >START</Text>
       </Pressable>
     </>
   );
