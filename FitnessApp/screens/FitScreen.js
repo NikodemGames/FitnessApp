@@ -53,7 +53,7 @@ const FitScreen = () => {
           navigation.navigate("Rest")
           setCompleted(...completed, current.name)
           setWorkout(workout + 1)
-          setMinutes(minutes + 0.5)
+          setMinutes(minutes + 4.5)
           setCalories(calories + 60)
           setTimeout(() => {
             setIndex(index + 1)

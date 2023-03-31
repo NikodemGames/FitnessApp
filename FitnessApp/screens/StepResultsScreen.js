@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Colours } from './Colours';
-import { useNavigation } from '@react-navigation/core';
 import { Ionicons } from '@expo/vector-icons';
 
 const StepResultsScreen = ({ navigation, route }) => {

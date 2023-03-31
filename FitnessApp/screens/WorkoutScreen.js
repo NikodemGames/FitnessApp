@@ -17,9 +17,9 @@ const WorkoutScreen = () => {
         
         {/* Loop through the exercises and display them */}
         {route.params.excersises.map((item, index) => (  
-          <Pressable style={styles.pressable} key={index}>
+          <Pressable style={styles.pressable} key={index}> 
             <Image style={styles.excersiseImage} source={{uri:item.image}}/> 
-
+            {/* displays relevant images by accessing the informations stored in fitness.js with the approriate tags */}
             <View style={styles.excersiseDetails}>
               <Text style={styles.excersiseName}>{item.name}</Text>
 
