@@ -29,8 +29,8 @@ const UserProfile = () => {
     fetchData();
   }, []);
 
-  const handleNameChange = (value) => {
-    setName(value);
+  const handleNameChange = (value) => { //handles the change of the respective value
+    setName(value); // sets value to the new input by the user 
   };
 
   const handleAgeChange = (value) => {
