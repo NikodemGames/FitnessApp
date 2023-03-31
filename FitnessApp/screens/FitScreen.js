@@ -62,8 +62,8 @@ const FitScreen = () => {
           navigation.navigate("Rest")
           setCompleted(...completed,current.name)
           setWorkout(workout+1)
-          setMinutes(minutes+2.5)
-          setCalories(calories+6.30)
+          setMinutes(minutes+0.5)
+          setCalories(calories+60)
           setTimeout(()=>{
             setIndex(index+1)
           },2000)
@@ -73,41 +73,7 @@ const FitScreen = () => {
         </Pressable>
       )}
 
-      
-      <Pressable style={{flexDirection:"row",alignItems:"center",marginLeft:"auto",marginRight:"auto", marginTop:80}}>
-        <Pressable 
-        disabled={index===0}
-        onPress={()=>{
-          navigation.navigate("Rest");
-          setTimeout(()=>{
-              setIndex(index-1)
-          },2000)
-        }}
-        style={{backgroundColor:"green",padding:10,borderRadius:20,marginHorizontal:20,width:120}}>
-          <Text style={{color:"white",fontWeight:"bold",textAlign:"center"}}>PREVIOUS</Text>
-        </Pressable>
-        {index +1 >= excersise.length ? (
-          <Pressable
-          onPress={() => {
-            navigation.navigate("Home")
-          }}
-          style={{backgroundColor:"red",padding:10,borderRadius:20,marginHorizontal:20,width:120}}>
-          <Text style={{color:"white",fontWeight:"bold",textAlign:"center"}}>SKIP</Text>
-        </Pressable>
-        ) : (
-          <Pressable
-          onPress={() => {
-            navigation.navigate("Rest")
-            setTimeout(()=>{
-              setIndex(index+1)
-            },2000)
-          }}  
-          style={{backgroundColor:"red",padding:10,borderRadius:20,marginHorizontal:20,width:120}}>
-          <Text style={{color:"white",fontWeight:"bold",textAlign:"center"}}>SKIP</Text>
-        </Pressable>
-        )}
-        
-      </Pressable>
+
     </SafeAreaView>
   )
 }
