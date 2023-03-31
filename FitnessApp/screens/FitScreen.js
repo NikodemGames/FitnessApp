@@ -2,7 +2,6 @@ import { StyleSheet, Text, View, SafeAreaView, Image, Pressable, Vibration} from
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { FitnessItems } from '../Context'
-import fitness from '../data/fitness'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function handleVibration() {
@@ -22,7 +21,6 @@ const FitScreen = () => {
     const [index, setIndex] = useState(0); 
     const excersise = route.params.excersises;
     const current = excersise[index];
-    // console.log(current, "first exercise")
     const {completed, setCompleted, minutes, setMinutes, calories, setCalories, workout, setWorkout} = useContext(FitnessItems);
     console.log(workout, "completed exercise");
 

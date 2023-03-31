@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, Button, TouchableOpacity, Pressable } from 'react-native'
+import { StyleSheet, Text, View,  ScrollView,  TouchableOpacity, } from 'react-native'
 import React, { useContext } from 'react'
 import FitnessCards from '../components/FitnessCards'
 import { FitnessItems } from '../Context'
