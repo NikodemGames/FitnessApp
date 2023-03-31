@@ -6,11 +6,11 @@ import { Colours } from './Colours'
 
 
 const HomeScreen = ({ navigation }) => {
-  const { minutes, calories, workout } = useContext(FitnessItems);
+  const { minutes, calories, workout } = useContext(FitnessItems); //Using context.js to retrieve variables.
 
 
-  const navigateToProfile = () => {
-    navigation.navigate('ProfileScreen');
+  const navigateToProfile = () => { 
+    navigation.navigate('ProfileScreen'); //Using navigation object to navigate the user to another screen.
   };
   const navigateToWorkoutLog = () => {
     navigation.navigate('LogScreen');

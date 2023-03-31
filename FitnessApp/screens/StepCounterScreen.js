@@ -16,21 +16,21 @@ const StepCounterScreen = () => {
   const [height, setHeight] = useState(170)// assigned a default height in cm
   const navigation = useNavigation();
 
-  const getUserData = async () => {
+  const getUserData = async () => { //Retrieves data from AsyncStorage's item called 'user' and its contents.
     try {
       const userDataString = await AsyncStorage.getItem('user');
       const userData = JSON.parse(userDataString);
-      const userWeight = userData.weight;
+      const userWeight = userData.weight; 
       const userHeight = userData.height; 
-      setWeight(userWeight);
+      setWeight(userWeight);//assigning the collected data to a new variable so it can be used in this script.
       setHeight(userHeight)
     } catch (e) {
-      console.log('Error getting user data:', e);
+      console.log('Error getting user data:', e); //If there's an error it is logged.
     }
   };
  
   useEffect(()=>{
-    getUserData();
+    getUserData(); //Calls the function that collects data from async storage.
   },[]);
 
   //pedometer counts number of steps
@@ -53,9 +53,9 @@ const StepCounterScreen = () => {
     return () => {
       subscription.remove();
     };
-  }, [weight, height]);
+  }, [weight, height]);  // Only re-run this effect if the user's weight or height changes
 
-  const navigateToStepResults = () => {
+  const navigateToStepResults = () => { //Navigates the user to summary of step workout.
     navigation.navigate('StepResults', {
       stepCount: stepCount,
       distance: distance,
@@ -63,7 +63,7 @@ const StepCounterScreen = () => {
     });
   };
 
-  return (
+  return ( //toFixed(2) rounded to 2 decimal places
     <View style={styles.container}>
       <Ionicons onPress={() => navigation.goBack()}
       style={{position:"absolute", top:60, left:20}} name="arrow-back-circle" size={30} color="white" />
@@ -74,12 +74,14 @@ const StepCounterScreen = () => {
       <Text style={styles.value}>{stepCount}</Text>
 
       <Text style={styles.title}>Distance:</Text>
-      <Text style={styles.value}>{distance.toFixed(2)} km</Text>
+    
+      <Text style={styles.value}>{distance.toFixed(2)} km</Text> 
 
       <Text style={styles.title}>Calories Burned:</Text>
       <Text style={styles.value}>{caloriesBurned.toFixed(2)} kcal</Text>
       {/* <Text style={styles.title}>Weight:</Text>
       <Text style={styles.value}>{weight} kg</Text> */}
+      
       
       <TouchableOpacity style={styles.button} onPress={navigateToStepResults}>
         <Text style={styles.buttonText}>Finish Workout</Text>

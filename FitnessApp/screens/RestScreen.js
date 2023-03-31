@@ -5,9 +5,9 @@ import { useNavigation } from '@react-navigation/native';
 const RestScreen = () => {
     const navigation = useNavigation();
     let timer =0;
-    const [timeLeft,setTimeLeft] = useState(3);
+    const [timeLeft,setTimeLeft] = useState(3); //Initialising timeLeft at 3
 
-    const startTime = () => {
+    const startTime = () => {  //Called every second reducing the timer. If timeLeft is 0 it navigates back and clears the timer.
         setTimeout(()=>{
             if(timeLeft<=0){
                 navigation.goBack();

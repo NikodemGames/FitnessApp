@@ -11,7 +11,7 @@ const WorkoutLogsScreen = ({ navigation }) => {
     getWorkoutLogs();
   }, []);
 
-  const getWorkoutLogs = async () => {
+  const getWorkoutLogs = async () => { // retrieving data from asyncstorage to display the dates and amount of workouts done on this log page.
     try {
       const jsonValue = await AsyncStorage.getItem('workoutLogs');
       const logs = jsonValue != null ? JSON.parse(jsonValue) : [];

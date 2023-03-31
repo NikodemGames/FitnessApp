@@ -12,7 +12,7 @@ const UserProfile = () => {
   const [weight, setWeight] = useState('');
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async () => { //empty the contents of user if not empty and attach name age height and weight input from the player to the data variable.
       try {
         const jsonValue = await AsyncStorage.getItem('user');
         if (jsonValue !== null) {
@@ -23,7 +23,7 @@ const UserProfile = () => {
           setWeight(data.weight);
         }
       } catch (e) {
-        console.log('Error retrieving user:', e);
+        console.log('Error retrieving user:', e); // console log if error during data manipulation
       }
     };
     fetchData();
@@ -45,7 +45,7 @@ const UserProfile = () => {
     setWeight(value);
   };
 
-  const handleSave = async () => {
+  const handleSave = async () => { //A save function that saves user's inputs in AsyncStorage and navigates user back.
     try {
       const userData = {
         name: name,

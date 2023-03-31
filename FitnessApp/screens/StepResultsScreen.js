@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/core';
 import { Ionicons } from '@expo/vector-icons';
 
 const StepResultsScreen = ({ navigation, route }) => {
-  const { stepCount, distance, caloriesBurned } = route.params;
+  const { stepCount, distance, caloriesBurned } = route.params; // Extract the values of "stepCount", "distance", and "caloriesBurned" from the "route" prop
   
   const navigateToHome = () => {
     navigation.navigate('Home');

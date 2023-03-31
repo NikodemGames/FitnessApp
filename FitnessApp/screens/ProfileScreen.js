@@ -3,19 +3,20 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { Colours } from './Colours';
+import { Ionicons } from '@expo/vector-icons';
 
 
 const Profile = () => {
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState(null); //This will store the user data
   const navigation = useNavigation();
 
   useEffect(() => {
-    const getUserData = async () => {
+    const getUserData = async () => { //Retrieving item 'user' from asyncstorage with data to update this page.
       try {
         const jsonValue = await AsyncStorage.getItem('user');
         const data = jsonValue != null ? JSON.parse(jsonValue) : null;
         setUserData(data);
-      } catch (e) {
+      } catch (e) { //Catching any errors with retrieving the data.
         console.log('Error getting user data:', e);
       }
     };
@@ -23,18 +24,19 @@ const Profile = () => {
   }, []);
 
   const handleEdit = () => {
-    navigation.navigate('ProfileEdit');
+    navigation.navigate('ProfileEdit'); //Takes the user to the edit screen when called.
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
+      <Ionicons name="arrow-back-circle" size={30} color={Colours.white} style={styles.backIcon} onPress={() => navigation.goBack()}/> 
         <Text style={styles.title}>My Profile</Text>
-        <TouchableOpacity style={styles.editButton} onPress={handleEdit}>
+        <TouchableOpacity style={styles.editButton} onPress={handleEdit}> 
           <Text style={styles.editButtonText}>Edit</Text>
         </TouchableOpacity>
       </View>
-      {userData ? (
+      {userData ? ( // Display userData and its contents if available.
         <>
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Name:</Text>
@@ -53,7 +55,7 @@ const Profile = () => {
             <Text style={styles.sectionText}>{userData.weight} kg</Text>
           </View>
         </>
-      ) : (
+      ) : ( //If no user data is available display this.
         <Text style={styles.text}>No user data found.</Text>
       )}
     </View>

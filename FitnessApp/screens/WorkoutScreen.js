@@ -14,8 +14,9 @@ const WorkoutScreen = () => {
 
         <Ionicons onPress={() => navigation.goBack()}
         style={styles.backButton} name="arrow-back-circle" size={30} color="white" />
-
-        {route.params.excersises.map((item, index) => (
+        
+        {/* Loop through the exercises and display them */}
+        {route.params.excersises.map((item, index) => (  
           <Pressable style={styles.pressable} key={index}>
             <Image style={styles.excersiseImage} source={{uri:item.image}}/> 
 
