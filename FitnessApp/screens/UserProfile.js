@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { Colours } from './Colours';
 
 const UserProfile = () => {
   const navigation = useNavigation();
@@ -62,96 +63,109 @@ const UserProfile = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>User Profile</Text>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+          <Text style={styles.saveButtonText}>Save</Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.form}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Name</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Name"
-            value={name}
-            onChangeText={handleNameChange}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Age</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Age"
-            keyboardType="numeric"
-            value={age}
-            onChangeText={handleAgeChange}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Height (cm)</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Height"
-            keyboardType="numeric"
-            value={height}
-            onChangeText={handleHeightChange}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Weight (kg)</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Weight"
-            keyboardType="numeric"
-            value={weight}
-            onChangeText={handleWeightChange}
-          />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button title="Save" onPress={handleSave} />
-        </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Name</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Name"
+          value={name}
+          onChangeText={handleNameChange}
+        />
+      </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Age</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Age"
+          keyboardType="numeric"
+          value={age}
+          onChangeText={handleAgeChange}
+        />
+      </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Height (cm)</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Height"
+          keyboardType="numeric"
+          value={height}
+          onChangeText={handleHeightChange}
+        />
+      </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Weight (kg)</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Weight"
+          keyboardType="numeric"
+          value={weight}
+          onChangeText={handleWeightChange}
+        />
       </View>
     </View>
   );
+
 };
-export default UserProfile;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  inputContainer: {
-    width: '80%',
-    marginBottom: 20,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 10,
-    fontSize: 18,
-    borderRadius: 5,
+    backgroundColor: Colours.black,
+    paddingHorizontal: 20,
+    paddingTop: 50,
   },
   buttonContainer: {
-    width: '80%',
     marginTop: 20,
+    marginBottom: 40,
   },
-  button: {
-    backgroundColor: '#007AFF',
-    padding: 15,
-    borderRadius: 5,
+  saveButton: {
+    backgroundColor: Colours.emerald,
+    paddingVertical: 20,
+    paddingHorizontal: 40,
+    borderRadius: 10,
+    alignSelf: 'center',
   },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
+  saveButtonText: {
+    color: Colours.white,
+    fontSize: 24,
     fontWeight: 'bold',
+  },
+  inputContainer: {
+    marginBottom: 20,
+  },
+  label: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: Colours.white,
+    marginBottom: 5,
+  },
+  input: {
+    backgroundColor: Colours.white,
+    borderRadius: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    fontSize: 20,
+    color: Colours.black,
+  },
+  header: {
+    marginBottom: 40,
+  },
+  headerText: {
+    fontSize: 40,
+    fontWeight: 'bold',
+    color: Colours.black,
     textAlign: 'center',
   },
 });
+
+
+export default UserProfile;
+
 
 
 
