@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { Colours } from './Colours';
+
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
@@ -28,24 +30,26 @@ const Profile = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>My Profile</Text>
-        <Button title="Edit" onPress={handleEdit} />
+        <TouchableOpacity style={styles.editButton} onPress={handleEdit}>
+          <Text style={styles.editButtonText}>Edit</Text>
+        </TouchableOpacity>
       </View>
       {userData ? (
         <>
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Name</Text>
+            <Text style={styles.sectionTitle}>Name:</Text>
             <Text style={styles.sectionText}>{userData.name}</Text>
           </View>
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Age</Text>
+            <Text style={styles.sectionTitle}>Age:</Text>
             <Text style={styles.sectionText}>{userData.age}</Text>
           </View>
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Height</Text>
+            <Text style={styles.sectionTitle}>Height:</Text>
             <Text style={styles.sectionText}>{userData.height} cm</Text>
           </View>
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Weight</Text>
+            <Text style={styles.sectionTitle}>Weight:</Text>
             <Text style={styles.sectionText}>{userData.weight} kg</Text>
           </View>
         </>
@@ -59,30 +63,49 @@ const Profile = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colours.emerald,
     paddingHorizontal: 20,
+    paddingTop: 50,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 50,
-    marginBottom: 20,
+    marginBottom: 40,
   },
   title: {
-    fontSize: 24,
+    fontSize: 40,
+    fontWeight: 'bold',
+    color: Colours.black,
+  },
+  editButton: {
+    backgroundColor: Colours.darkGreen,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+  },
+  editButtonText: {
+    color: Colours.white,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   section: {
-    marginBottom: 15,
+    marginBottom: 20,
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
+    color: Colours.black,
     marginBottom: 5,
   },
   sectionText: {
-    fontSize: 16,
+    fontSize: 20,
+    color: Colours.white,
+  },
+  text: {
+    fontSize: 24,
+    color: Colours.black,
+    textAlign: 'center',
   },
 });
 
