@@ -2,12 +2,14 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Colours } from './Colours';
 import { Ionicons } from '@expo/vector-icons';
+import { handleVibration } from '../screens/FitScreen';
 
 const StepResultsScreen = ({ navigation, route }) => {
   const { stepCount, distance, caloriesBurned } = route.params; // Extract the values of "stepCount", "distance", and "caloriesBurned" from the "route" prop
   
   const navigateToHome = () => {
     navigation.navigate('Home');
+    handleVibration();
   };
 
   return (
@@ -32,7 +34,7 @@ const StepResultsScreen = ({ navigation, route }) => {
       
       <Text style={styles.title}>That was a Great Workout!</Text>
 
-      <TouchableOpacity style={styles.button} onPress={navigateToHome}>
+      <TouchableOpacity style={styles.button} onPress={navigateToHome} >
         <Text style={styles.buttonText}>Home</Text>
       </TouchableOpacity>
     </View>

@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Colours } from './Colours';
 import { useNavigation } from '@react-navigation/native'; 
 import { Ionicons } from '@expo/vector-icons';
+import { handleVibration } from '../screens/FitScreen';
 
 
 const StepCounterScreen = () => {
@@ -61,6 +62,7 @@ const StepCounterScreen = () => {
       distance: distance,
       caloriesBurned: caloriesBurned,
     });
+    handleVibration(); 
   };
 
   return ( //toFixed(2) rounded to 2 decimal places

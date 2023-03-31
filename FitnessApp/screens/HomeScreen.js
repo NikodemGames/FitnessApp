@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 import FitnessCards from '../components/FitnessCards'
 import { FitnessItems } from '../Context'
 import { Colours } from './Colours'
+import { handleVibration } from '../screens/FitScreen';
 
 
 const HomeScreen = ({ navigation }) => {
@@ -17,12 +18,13 @@ const HomeScreen = ({ navigation }) => {
   };
   const navigateToStepCounter = () => {
     navigation.navigate('StepCounter');
+    handleVibration();
   };
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.title}>HOME WORKOUT</Text>
+          <Text style={styles.title}>GYM PRO</Text>
 
           <TouchableOpacity style={styles.button} onPress={navigateToProfile}>
             <Text style={styles.buttonText}>Profile</Text>
@@ -35,11 +37,11 @@ const HomeScreen = ({ navigation }) => {
         <View style={styles.row}>
           <View style={styles.workoutInfo}>
             <Text style={styles.workoutTitle}>{workout}</Text>
-            <Text style={styles.workoutSubtitle}>WORKOUT</Text>
+            <Text style={styles.workoutSubtitle}>SETS DONE</Text>
 
           </View>
           <View style={styles.workoutInfo}>
-            <Text style={styles.workoutTitle}>{calories}</Text>
+            <Text style={styles.workoutTitle}>{calories}</Text> 
             <Text style={styles.workoutSubtitle}>KCAL</Text>
           </View>
           <View style={styles.workoutInfo}>
@@ -49,7 +51,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </View>
         <TouchableOpacity style={styles.cardioButton} onPress={navigateToStepCounter}>
-          <Text style={styles.cardioButtonText}>Cardio</Text>
+          <Text style={styles.cardioButtonText}>CARDIO</Text>
         </TouchableOpacity>
         <FitnessCards />
       </View>
